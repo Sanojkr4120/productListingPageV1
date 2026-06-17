@@ -12,8 +12,8 @@ const Navbar = ({ cartCount, onCartClick, onSearchChange }) => {
           
           {/* Logo */}
           <div className="flex items-center">
-            <h1 className="text-xl md:text-2xl font-black text-gray-900 tracking-tighter">
-              SSK<span className="text-blue-600">BYTES</span>
+            <h1 className="text-xl md:text-2xl font-black text-blue-600 tracking-tighter">
+              SSKBYTES
             </h1>
           </div>
 

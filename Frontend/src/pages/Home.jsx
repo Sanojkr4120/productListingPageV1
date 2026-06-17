@@ -47,8 +47,8 @@ const Home = () => {
 
       <main className="flex-grow max-w-7xl mx-auto w-full px-4 py-8 md:px-8">
         <header className="mb-10 text-center md:text-left">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-2">
-            Explore our <span className="text-blue-600">Premium Products</span>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-blue-600 mb-2">
+            Explore our Premium Products
           </h2>
         </header>
 
