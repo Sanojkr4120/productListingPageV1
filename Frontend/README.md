@@ -46,4 +46,3 @@ A responsive e-commerce store frontend built with React and Tailwind CSS.
 
 ---
 
-
