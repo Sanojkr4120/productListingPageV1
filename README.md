@@ -48,4 +48,3 @@ A responsive e-commerce store frontend built with React and Tailwind CSS.
 
 ## Project View
 ![image alt](https://github.com/Sanojkr4120/productListingPageV1/blob/49633a78aeffcf3888bae46f40dbfac5496c27d5/Frontend/Screenshot%202026-06-17%20142111.png)
-
