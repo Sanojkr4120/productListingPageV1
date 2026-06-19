@@ -31,6 +31,19 @@ const Home = () => {
     setCartItems([...cartItems, product]);
   };
 
+  const handleRemoveOneFromCart = (productId) => {
+    const index = cartItems.findIndex(item => item.id === productId);
+    if (index !== -1) {
+      const newCart = [...cartItems];
+      newCart.splice(index, 1);
+      setCartItems(newCart);
+    }
+  };
+
+  const handleRemoveAllOfProduct = (productId) => {
+    setCartItems(cartItems.filter(item => item.id !== productId));
+  };
+
   const handleRemoveFromCart = (index) => {
     const newCart = [...cartItems];
     newCart.splice(index, 1);
@@ -63,6 +76,9 @@ const Home = () => {
         onClose={() => setIsCartOpen(false)} 
         cartItems={cartItems}
         onRemoveItem={handleRemoveFromCart}
+        onIncrement={handleAddToCart}
+        onDecrement={handleRemoveOneFromCart}
+        onRemoveAll={handleRemoveAllOfProduct}
       />
     </div>
   );

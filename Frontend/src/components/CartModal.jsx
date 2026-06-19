@@ -1,10 +1,20 @@
-import React from 'react';
-import { FiX, FiTrash2, FiShoppingCart } from 'react-icons/fi';
+import { FiX, FiTrash2, FiShoppingCart, FiPlus, FiMinus } from 'react-icons/fi';
 
-const CartModal = ({ isOpen, onClose, cartItems, onRemoveItem }) => {
+const CartModal = ({ isOpen, onClose, cartItems, onRemoveItem, onIncrement, onDecrement, onRemoveAll }) => {
   if (!isOpen) return null;
 
   const totalPrice = cartItems.reduce((total, item) => total + item.price, 0);
+
+  // Group items by ID to show quantity
+  const groupedItems = cartItems.reduce((acc, item) => {
+    const existingItem = acc.find(i => i.id === item.id);
+    if (existingItem) {
+      existingItem.quantity += 1;
+    } else {
+      acc.push({ ...item, quantity: 1 });
+    }
+    return acc;
+  }, []);
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
@@ -50,9 +60,9 @@ const CartModal = ({ isOpen, onClose, cartItems, onRemoveItem }) => {
             </div>
           ) : (
             <div className="space-y-4">
-              {cartItems.map((item, index) => (
+              {groupedItems.map((item) => (
                 <div 
-                  key={`${item.id}-${index}`} 
+                  key={item.id} 
                   className="flex items-center gap-4 p-4 border border-gray-100 rounded-xl hover:border-blue-100 hover:bg-blue-50/30 transition-all group"
                 >
                   <img 
@@ -64,10 +74,28 @@ const CartModal = ({ isOpen, onClose, cartItems, onRemoveItem }) => {
                     <h4 className="font-bold text-gray-800 text-sm truncate">{item.name}</h4>
                     <p className="text-blue-600 font-semibold">₹{item.price}</p>
                   </div>
+
+                  {/* Quantity Controls */}
+                  <div className="flex items-center bg-gray-100 rounded-lg p-1">
+                    <button 
+                      onClick={() => onDecrement(item.id)}
+                      className="p-1 hover:bg-white rounded-md transition-colors text-gray-600"
+                    >
+                      <FiMinus size={14} />
+                    </button>
+                    <span className="px-3 font-bold text-gray-800 text-sm">{item.quantity}</span>
+                    <button 
+                      onClick={() => onIncrement(item)}
+                      className="p-1 hover:bg-white rounded-md transition-colors text-gray-600"
+                    >
+                      <FiPlus size={14} />
+                    </button>
+                  </div>
+
                   <button 
-                    onClick={() => onRemoveItem(index)}
+                    onClick={() => onRemoveAll(item.id)}
                     className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all"
-                    title="Remove item"
+                    title="Remove all"
                   >
                     <FiTrash2 size={18} />
                   </button>
