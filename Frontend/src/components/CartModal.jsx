@@ -25,7 +25,7 @@ const CartModal = ({ isOpen, onClose, cartItems, onRemoveItem, onIncrement, onDe
       />
 
       {/* Modal Content */}
-      <div className="relative bg-white w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden transform transition-all duration-300 animate-zoom-in animate-fade-in">
+      <div className="relative bg-white w-full max-w-lg rounded-2xl shadow-2xl flex flex-col h-[80vh] max-h-[700px] overflow-hidden transform transition-all duration-300 animate-zoom-in animate-fade-in">
         
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b bg-gray-50/50">
@@ -44,9 +44,9 @@ const CartModal = ({ isOpen, onClose, cartItems, onRemoveItem, onIncrement, onDe
         </div>
 
         {/* Body */}
-        <div className="max-h-[60vh] overflow-y-auto p-6">
+        <div className="flex-1 overflow-y-auto p-6">
           {cartItems.length === 0 ? (
-            <div className="text-center py-12">
+            <div className="h-full flex flex-col items-center justify-center text-center py-12">
               <div className="inline-flex items-center justify-center w-20 h-20 bg-gray-100 rounded-full mb-4">
                 <FiShoppingCart size={32} className="text-gray-300" />
               </div>
