@@ -17,7 +17,7 @@ const CartModal = ({ isOpen, onClose, cartItems, onRemoveItem, onIncrement, onDe
   }, []);
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4">
       {/* Backdrop with Blur */}
       <div 
         className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300"
@@ -28,7 +28,7 @@ const CartModal = ({ isOpen, onClose, cartItems, onRemoveItem, onIncrement, onDe
       <div className="relative bg-white w-full max-w-lg rounded-2xl shadow-2xl flex flex-col h-[80vh] max-h-[700px] overflow-hidden transform transition-all duration-300 animate-zoom-in animate-fade-in">
         
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b bg-gray-50/50">
+        <div className="flex items-center justify-between p-4 sm:p-6 border-b bg-gray-50/50">
           <div className="flex items-center gap-3">
             <div className="bg-blue-100 p-2 rounded-lg text-blue-600">
               <FiShoppingCart size={20} />
@@ -44,7 +44,7 @@ const CartModal = ({ isOpen, onClose, cartItems, onRemoveItem, onIncrement, onDe
         </div>
 
         {/* Body */}
-        <div className="flex-1 overflow-y-auto p-6">
+        <div className="flex-1 overflow-y-auto p-4 sm:p-6">
           {cartItems.length === 0 ? (
             <div className="h-full flex flex-col items-center justify-center text-center py-12">
               <div className="inline-flex items-center justify-center w-20 h-20 bg-gray-100 rounded-full mb-4">
@@ -59,46 +59,55 @@ const CartModal = ({ isOpen, onClose, cartItems, onRemoveItem, onIncrement, onDe
               </button>
             </div>
           ) : (
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               {groupedItems.map((item) => (
                 <div 
                   key={item.id} 
-                  className="flex items-center gap-4 p-4 border border-gray-100 rounded-xl hover:border-blue-100 hover:bg-blue-50/30 transition-all group"
+                  className="flex gap-3 sm:gap-4 p-3 sm:p-4 border border-gray-100 rounded-xl hover:border-blue-100 hover:bg-blue-50/30 transition-all group"
                 >
                   <img 
                     src={item.image} 
                     alt={item.name} 
-                    className="w-16 h-16 object-cover rounded-lg shadow-sm"
+                    className="w-20 h-20 sm:w-16 sm:h-16 object-cover rounded-lg shadow-sm"
                   />
-                  <div className="flex-grow min-w-0">
-                    <h4 className="font-bold text-gray-800 text-sm truncate">{item.name}</h4>
-                    <p className="text-blue-600 font-semibold">₹{item.price}</p>
-                  </div>
+                  <div className="flex-grow flex flex-col justify-between min-w-0">
+                    <div className="flex justify-between items-start gap-2">
+                      <div className="min-w-0">
+                        <h4 className="font-bold text-gray-800 text-sm sm:text-base truncate">{item.name}</h4>
+                        <p className="text-blue-600 font-semibold text-sm">₹{item.price}</p>
+                      </div>
+                      <button 
+                        onClick={() => onRemoveAll(item.id)}
+                        className="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all flex-shrink-0"
+                        title="Remove all"
+                      >
+                        <FiTrash2 size={18} />
+                      </button>
+                    </div>
 
-                  {/* Quantity Controls */}
-                  <div className="flex items-center bg-gray-100 rounded-lg p-1">
-                    <button 
-                      onClick={() => onDecrement(item.id)}
-                      className="p-1 hover:bg-white rounded-md transition-colors text-gray-600"
-                    >
-                      <FiMinus size={14} />
-                    </button>
-                    <span className="px-3 font-bold text-gray-800 text-sm">{item.quantity}</span>
-                    <button 
-                      onClick={() => onIncrement(item)}
-                      className="p-1 hover:bg-white rounded-md transition-colors text-gray-600"
-                    >
-                      <FiPlus size={14} />
-                    </button>
+                    <div className="flex items-center justify-between sm:justify-start gap-4 mt-2">
+                      {/* Quantity Controls */}
+                      <div className="flex items-center bg-gray-100 rounded-lg p-1">
+                        <button 
+                          onClick={() => onDecrement(item.id)}
+                          className="p-1 hover:bg-white rounded-md transition-colors text-gray-600"
+                        >
+                          <FiMinus size={14} />
+                        </button>
+                        <span className="px-3 font-bold text-gray-800 text-sm">{item.quantity}</span>
+                        <button 
+                          onClick={() => onIncrement(item)}
+                          className="p-1 hover:bg-white rounded-md transition-colors text-gray-600"
+                        >
+                          <FiPlus size={14} />
+                        </button>
+                      </div>
+                      
+                      <div className="hidden sm:block text-right flex-grow">
+                        <p className="text-sm font-bold text-gray-800">₹{item.price * item.quantity}</p>
+                      </div>
+                    </div>
                   </div>
-
-                  <button 
-                    onClick={() => onRemoveAll(item.id)}
-                    className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all"
-                    title="Remove all"
-                  >
-                    <FiTrash2 size={18} />
-                  </button>
                 </div>
               ))}
             </div>
@@ -107,7 +116,7 @@ const CartModal = ({ isOpen, onClose, cartItems, onRemoveItem, onIncrement, onDe
 
         {/* Footer */}
         {cartItems.length > 0 && (
-          <div className="p-6 border-t bg-gray-50/50">
+          <div className="p-4 sm:p-6 border-t bg-gray-50/50">
             <div className="flex items-center justify-between mb-4">
 
               <div>
